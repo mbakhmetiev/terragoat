@@ -7,6 +7,7 @@ resource azurerm_kubernetes_cluster "k8s_cluster" {
     type = "SystemAssigned"
   }
   default_node_pool {
+    only_critical_addons_enabled = true
     name       = "default"
     vm_size    = "Standard_D2_v2"
     node_count = 2
@@ -31,5 +32,10 @@ resource azurerm_kubernetes_cluster "k8s_cluster" {
     git_org              = "bridgecrewio"
     git_repo             = "terragoat"
     yor_trace            = "6103d111-864e-42e5-899c-1864de281fd1"
+  }
+  local_account_disabled = true
+  sku_tier = "Standard"
+  key_vault_secrets_provider = {
+    secret_rotation_enabled = true
   }
 }
